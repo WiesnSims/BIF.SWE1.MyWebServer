@@ -9,6 +9,8 @@ namespace MyWebServer
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("MyWebServer startet jetzt!");
+
             Read();
 
 
