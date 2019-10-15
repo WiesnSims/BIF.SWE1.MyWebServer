@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace MyWebServer
 {
@@ -9,9 +10,21 @@ namespace MyWebServer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("MyWebServer startet jetzt!");
+            
 
-            Read();
+            Console.WriteLine("MyWebServer starts now!");
+
+            //Thread serverThread = new Thread(() => server.Start());
+            //serverThread.Start();
+
+            Console.WriteLine("Server is running.");
+
+            while(true)
+            {
+
+            }
+
+            //Read();
 
 
         }
