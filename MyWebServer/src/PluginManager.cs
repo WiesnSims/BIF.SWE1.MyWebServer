@@ -15,10 +15,11 @@ namespace MyWebServer
         {
             plugins = new List<IPlugin>();
             plugins.Add(new TestPlugin());
-            //plugins.Add(new DefaultErrorPlugin());
+            plugins.Add(new StaticFilePlugin());
+
+            //plugins.Add(new DefaultErrorPlugin());    -> needed?!
             //plugins.Add(new ToLowerPlugin());
-            //plugins.Add(new WebPagePlugin());
-            //plugins.Add(new StaticFilePlugin());
+            //plugins.Add(new WebPagePlugin());     -> needed?!
             //plugins.Add(new TemperaturePlugin());
             //plugins.Add(new NaviPlugin());
         }
@@ -36,9 +37,9 @@ namespace MyWebServer
         public void Add(string plugin)
         {
             Type t = Type.GetType(plugin);
-            if (t.IsAssignableFrom(typeof(IPlugin)))
+            if (t.IsAssignableFrom(typeof(IPlugin))) //if Plugin does not exist, throw Exception
             {
-                throw new InvalidOperationException("Object has to implement IPlugin.");
+                throw new InvalidOperationException("Plugin could not be found!");
             }
             IPlugin newPlugin = (IPlugin)Activator.CreateInstance(t);
             plugins.Add(newPlugin);        

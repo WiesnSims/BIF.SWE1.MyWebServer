@@ -134,17 +134,16 @@ namespace MyWebServer
 
             if (content != null && ContentLength != 0)
             {
-                //Write seperator (blank line):
+                //(blank line):
                 writer.WriteLine();
 
                 //Write content:
                 writer.Write(Encoding.UTF8.GetString(content));
             }
 
-            writer.Flush();
-
-            //LASSEN UNIT TESTS NICHT ZU - SPÄTER HINZUFÜGEN
-            //writer.Close();
+            //writer.Flush(); writer.Close() not working?
+            
+            writer.Close();
         }
     }
 }

@@ -45,7 +45,10 @@ namespace MyWebServer
 
             StreamReader reader = new StreamReader(stream, Encoding.UTF8);
 
-            if (reader.EndOfStream) return;
+            if (reader.EndOfStream) return; //break when stream is empty
+
+            //firefox always sends request with Url "/facicon.ico" => should not be plugin request
+            if (this.Url.RawUrl == "/favicon.ico") return;
 
             //Parse request-line:
             parts = reader.ReadLine().Split(' ');
@@ -56,13 +59,13 @@ namespace MyWebServer
 
             //Parse request headers:
             if (this.headers == null) this.headers = new Dictionary<string, string>();
-            while (true) //break when line is String.Empty
+            while (true) //break when line is empty
             {
                 line = reader.ReadLine();
                 if (line == String.Empty) break;
 
                 parts = line.Split(new[] { ':' }, 2);
-                headers[parts[0].ToLower()] = parts[1].Remove(0, 1); //Remove whitespace
+                headers[parts[0].ToLower()] = parts[1].Remove(0, 1); //Remove leer
             }
 
             //Everything is valid

@@ -22,13 +22,18 @@ namespace MyWebServer.src
             this.ipAdress = ipAdress;
             this.port = port;
         }
+        public Webserver()
+        {
+            this.ipAdress = DEFAULT_IP_ADDRESS;
+            this.port = DEFAULT_PORT;
+        }
 
         public void Start() //Starts Server
         {
             TcpListener listener = new TcpListener(IPAddress.Parse(ipAdress), int.Parse(port));
             listener.Start();
             List<Thread> requestHandlerThreads = new List<Thread>();
-            while (true) //Creates new Thread when new User connects
+            while (true) //Creates new Thread / Socket when new User connects
             {
                 Socket socket = listener.AcceptSocket();
                 Thread t = new Thread(() => HandleRequest(socket));
@@ -43,7 +48,6 @@ namespace MyWebServer.src
             {
                 NetworkStream networkStream = new NetworkStream(socket);
                 IRequest request = new Request(networkStream);
-                //networkStream.Close();
 
                 if (!request.IsValid)
                 {
@@ -53,10 +57,9 @@ namespace MyWebServer.src
 
                 IPlugin plugin = pluginManager.GetBestSuitingPlugin(request);
                 IResponse response = plugin.Handle(request);
-
-                //networkStream = new NetworkStream(socket);
+                
                 response.Send(networkStream);
-                //networkStream.Flush();
+                //networkStream.Flush(); ?
                 networkStream.Close();
                 ConsoleWrite.Green("Response sent successfully. (" + plugin.GetType().Name + ")");
             }

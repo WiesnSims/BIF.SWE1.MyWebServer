@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyWebServer.src;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -10,14 +11,19 @@ namespace MyWebServer
     {
         static void Main(string[] args)
         {
-            
+            Webserver server = new Webserver();
 
-            Console.WriteLine("MyWebServer starts now!");
-
-            //Thread serverThread = new Thread(() => server.Start());
-            //serverThread.Start();
-
-            Console.WriteLine("Server is running.");
+            ConsoleWrite.Green("MyWebServer starts now!");
+            try
+            {
+                Thread serverThread = new Thread(() => server.Start());
+                serverThread.Start();
+                ConsoleWrite.Green("Server is running.");
+            }
+            catch(Exception e)
+            {
+                ConsoleWrite.Red("Server could not be started! ERROR: " + e.Message);
+            }
 
             while(true)
             {
