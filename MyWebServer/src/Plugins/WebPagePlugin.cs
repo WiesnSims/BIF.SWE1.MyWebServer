@@ -34,10 +34,12 @@ namespace MyWebServer.src.Plugins
         {
             string filename = PAGES[pageName];
             string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string projectDirectory = Directory.GetParent(directory).Parent.Parent.FullName;
+
 
             Response response = new Response();
             response.StatusCode = pageName == "/error" ? 404 : 200;
-            response.SetContent(File.ReadAllBytes(Path.Combine(directory, @"static-files\www\pages", filename)));
+            response.SetContent(File.ReadAllBytes(Path.Combine(projectDirectory, @"static-files\www\pages", filename)));
             response.ContentType = "text/html";
             return response;
         }

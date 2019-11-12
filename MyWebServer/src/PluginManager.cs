@@ -18,8 +18,7 @@ namespace MyWebServer
             plugins.Add(new StaticFilePlugin());
             plugins.Add(new DefaultErrorPlugin());
             plugins.Add(new WebPagePlugin());
-
-            //plugins.Add(new ToLowerPlugin());
+            plugins.Add(new ToLowerPlugin());
             //plugins.Add(new TemperaturePlugin());
             //plugins.Add(new NaviPlugin());
         }

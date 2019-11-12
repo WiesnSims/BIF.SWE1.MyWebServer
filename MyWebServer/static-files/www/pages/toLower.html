@@ -7,7 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="icon" href="data:,">
 
     <title>Embedded Sensor Cloud</title>
 </head>
@@ -17,10 +16,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/toLower">ToLower</a>
                 </li>
                 <li class="nav-item">
@@ -33,28 +32,46 @@
         </div>
     </nav>
 
-    <main role="main" class="container">
-        <div class="jumbotron">
-            <h1>ToLower</h1>
-            <p class="lead">Mit dem ToLower-Plugin können Zeichenketten in Kleinbuchstaben umgewandelt werden.</p>
-            <a class="btn btn-lg btn-primary" href="/toLower" role="button">ToLower-Page »</a>
+    <div class="container">
+        <form>
+            <div class="form-group row">
+                <label for="inputToLower" class="col-sm-1 col-form-label">Text:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputToLower" placeholder="Text">
+                </div>
+                <button class="btn btn-primary" id="submitToLower">ToLower</button>
+            </div>
+        </form>
+
+        <div class="alert alert-info" role="alert" id="text-to-lower">
+            alert?
         </div>
-        <div class="jumbotron">
-            <h1>Navi</h1>
-            <p class="lead">Mit dem Navi-Plugin kann in einem Land nach Straßennamen gesucht werden.</p>
-            <a class="btn btn-lg btn-primary" href="/navi" role="button">Navi-Page »</a>
-        </div>
-        <div class="jumbotron">
-            <h1>Temperatures</h1>
-            <p class="lead">Mit dem Temperature-Plugin können Temperaturmessungen eines Sensors angezeigt werden.</p>
-            <a class="btn btn-lg btn-primary" href="/temperatures" role="button">Temperatures-Page »</a>
-        </div>
-    </main>
+    </div>
 
     <!-- Optional JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    
+    <script>
+        $(document).ready(function () {
+            var alert = $('#text-to-lower');
+            alert.hide();
+            $('form').submit(false);
+
+            $("#submitToLower").click(function () {
+                $.post("/toLower",
+                    {
+                        text: $("#inputToLower").val()
+                    },
+                    function (data) {
+                    alert.text(data);
+                    alert.show();
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>

@@ -49,15 +49,15 @@ namespace MyWebServer.src
                 NetworkStream networkStream = new NetworkStream(socket);
                 IRequest request = new Request(networkStream);
 
-                if(request.Url.RawUrl.Contains("favicon.ico"))
-                {
-                    ConsoleWrite.Red("favicon.ico");
-                    var faviconResponse = new Response();
-                    faviconResponse.StatusCode = 404;
+                //if(request.Url.RawUrl.Contains("favicon.ico"))
+                //{
+                //    ConsoleWrite.Red("favicon.ico");
+                //    var faviconResponse = new Response();
+                //    faviconResponse.StatusCode = 404;
 
-                    faviconResponse.Send(networkStream);
-                    return;
-                }
+                //    faviconResponse.Send(networkStream);
+                //    return;
+                //}
 
                 if (!request.IsValid)
                 {
@@ -69,8 +69,8 @@ namespace MyWebServer.src
                 IResponse response = plugin.Handle(request);
                 
                 response.Send(networkStream);
-                //networkStream.Flush(); ?
-                networkStream.Close();
+                networkStream.Flush();
+                //networkStream.Close(); //???
                 ConsoleWrite.Green("Response sent successfully. (" + plugin.GetType().Name + ")");
             }
             catch (Exception e)

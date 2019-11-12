@@ -30,7 +30,8 @@ namespace MyWebServer.src.Plugins
 
         public IResponse Handle(IRequest req)
         {
-            string filename = directory + "/static-files" + req.Url.RawUrl;
+            string projectDirectory = Directory.GetParent(directory).Parent.FullName;
+            string filename = projectDirectory + "/static-files" + req.Url.RawUrl;
 
             Response response = new Response();
             response.StatusCode = 200;

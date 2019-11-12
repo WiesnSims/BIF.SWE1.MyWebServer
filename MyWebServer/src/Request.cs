@@ -50,9 +50,6 @@ namespace MyWebServer
             if (!httpMethods.Contains(method)) return;
             url = parts[1];
 
-            //firefox always sends request with Url "/favicon.ico" => should not be plugin request
-            //if (url.Contains("/favicon.ico")) return;
-
             //Parse request headers:
             if (this.headers == null) this.headers = new Dictionary<string, string>();
             while (true) //break when line is empty
