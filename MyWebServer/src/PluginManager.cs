@@ -16,10 +16,10 @@ namespace MyWebServer
             plugins = new List<IPlugin>();
             plugins.Add(new TestPlugin());
             plugins.Add(new StaticFilePlugin());
+            plugins.Add(new DefaultErrorPlugin());
+            plugins.Add(new WebPagePlugin());
 
-            //plugins.Add(new DefaultErrorPlugin());    -> needed?!
             //plugins.Add(new ToLowerPlugin());
-            //plugins.Add(new WebPagePlugin());     -> needed?!
             //plugins.Add(new TemperaturePlugin());
             //plugins.Add(new NaviPlugin());
         }

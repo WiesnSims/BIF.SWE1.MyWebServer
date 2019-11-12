@@ -49,6 +49,16 @@ namespace MyWebServer.src
                 NetworkStream networkStream = new NetworkStream(socket);
                 IRequest request = new Request(networkStream);
 
+                if(request.Url.RawUrl.Contains("favicon.ico"))
+                {
+                    ConsoleWrite.Red("favicon.ico");
+                    var faviconResponse = new Response();
+                    faviconResponse.StatusCode = 404;
+
+                    faviconResponse.Send(networkStream);
+                    return;
+                }
+
                 if (!request.IsValid)
                 {
                     ConsoleWrite.Red("Invalid request.");

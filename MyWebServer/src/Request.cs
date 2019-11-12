@@ -17,11 +17,7 @@ namespace MyWebServer
         private string url;
         private IDictionary<string, string> headers;
         private byte[] content;
-
-        //public Request() : this(new MemoryStream())
-        //{
-        //    //Call constructor with stream parameter = new MemoryStream()
-        //}
+        
 
         /* ---HTTP-Request-Example--- */
         //POST /send.php HTTP/1.1
@@ -31,8 +27,6 @@ namespace MyWebServer
         //Content-type: application/x-www-form-urlencoded
         //Content-length: 51
         //Connection: close
-        //
-        //Name=Wei%C3%9Fes+R%C3%B6ssl&Ort=St.+Wolfgang&PLZ=5360
 
         public Request(Stream stream)
         {
@@ -47,8 +41,7 @@ namespace MyWebServer
 
             if (reader.EndOfStream) return; //break when stream is empty
 
-            //firefox always sends request with Url "/facicon.ico" => should not be plugin request
-            if (this.Url.RawUrl == "/favicon.ico") return;
+            
 
             //Parse request-line:
             parts = reader.ReadLine().Split(' ');
@@ -56,6 +49,9 @@ namespace MyWebServer
             method = parts[0].ToUpper();
             if (!httpMethods.Contains(method)) return;
             url = parts[1];
+
+            //firefox always sends request with Url "/favicon.ico" => should not be plugin request
+            //if (url.Contains("/favicon.ico")) return;
 
             //Parse request headers:
             if (this.headers == null) this.headers = new Dictionary<string, string>();
@@ -80,19 +76,7 @@ namespace MyWebServer
             reader.Read(test, 0, ContentLength);
             content = Encoding.UTF8.GetBytes(test);
 
-            //int nextChar;
-            //byte[] nextCharInBytes;
-            //for(int x = 0; x < ContentLength; x=x)
-            //{
 
-            //    nextChar = reader.Read();
-            //    nextCharInBytes = BitConverter.GetBytes(nextChar);
-            //    for(int y = 0; y < nextCharInBytes.Length; y++)
-            //    {
-            //        content[x + y] = nextCharInBytes[y];
-            //    }
-            //    x += nextCharInBytes.Length;
-            //}
         }
 
         public bool IsValid

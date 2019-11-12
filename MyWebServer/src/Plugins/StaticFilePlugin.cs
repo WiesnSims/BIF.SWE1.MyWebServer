@@ -1,29 +1,41 @@
 ﻿using BIF.SWE1.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace MyWebServer.src.Plugins
 {
     class StaticFilePlugin : IPlugin
     {
+        private string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static readonly IDictionary<string, string> MIME_TYPES = new Dictionary<string, string>
+        {
+            {"html", "text/html"},
+            {"txt", "text/plain" },
+            {"css", "text/css" },
+            {"js", "text/javascript" },
+            {"jpg", "image/jpeg" }
+        };
+
         public float CanHandle(IRequest req)
         {
-            float canHandle = 0;
+            string filename = directory + "/static-files" + req.Url.RawUrl;
+            bool canHandle = File.Exists(filename);
 
-            if (req.IsValid && (req.Url.Segments.Contains("staticfile") || req.Url.Parameter.FirstOrDefault(x => x.Key == "staticfile_plugin").Value == "true")) canHandle = 1;
-            if (req.Url.RawUrl == "/") canHandle = 0.1f;
-
-            return canHandle;
+            return canHandle ? 0.7f : 0;
         }
 
         public IResponse Handle(IRequest req)
         {
+            string filename = directory + "/static-files" + req.Url.RawUrl;
+
             Response response = new Response();
             response.StatusCode = 200;
-            response.SetContent("<b>Static-File-Plugin-Content</b>");
-            response.ContentType = "text/html";
+            response.SetContent(File.ReadAllBytes(filename));
+            response.ContentType = MIME_TYPES[req.Url.RawUrl.Split('.').Last()] ?? "text/plain";
             return response;
         }
     }

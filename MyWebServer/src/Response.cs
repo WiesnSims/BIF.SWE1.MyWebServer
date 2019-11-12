@@ -123,7 +123,7 @@ namespace MyWebServer
             //Write content-length:
             writer.WriteLine(string.Format("{0}: {1}", "Content-Length", ContentLength));
 
-            //Write conten-type:
+            //Write content-type:
             writer.WriteLine(string.Format("{0}: {1}", "Content-Type", ContentType));
 
             //Write all other headers:
@@ -141,8 +141,8 @@ namespace MyWebServer
                 writer.Write(Encoding.UTF8.GetString(content));
             }
 
-            //writer.Flush(); writer.Close() not working?
-            
+            //writer.Flush();??? writer.Close() not working?
+            writer.Flush();
             writer.Close();
         }
     }
