@@ -8,7 +8,7 @@ using System.Text;
 
 namespace MyWebServer.src.Plugins
 {
-    class StaticFilePlugin : IPlugin
+    public class StaticFilePlugin : IPlugin
     {
         private string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private static readonly IDictionary<string, string> MIME_TYPES = new Dictionary<string, string>

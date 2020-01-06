@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MyWebServer.src.Plugins
 {
-    class WebPagePlugin :IPlugin
+    public class WebPagePlugin :IPlugin
     {
         private static readonly IDictionary<string, string> PAGES = new Dictionary<string, string>
         {

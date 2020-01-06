@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyWebServer.src.Plugins
 {
-    class NaviPlugin : IPlugin
+    public class NaviPlugin : IPlugin
     {
         public float CanHandle(IRequest req)
         {

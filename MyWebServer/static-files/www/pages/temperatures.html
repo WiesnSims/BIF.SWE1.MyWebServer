@@ -33,28 +33,74 @@
         </div>
     </nav>
 
-    <main role="main" class="container">
-        <div class="jumbotron">
-            <h1>ToLower</h1>
-            <p class="lead">Mit dem ToLower-Plugin können Zeichenketten in Kleinbuchstaben umgewandelt werden.</p>
-            <a class="btn btn-lg btn-primary" href="/toLower" role="button">ToLower-Page »</a>
-        </div>
-        <div class="jumbotron">
-            <h1>Navi</h1>
-            <p class="lead">Mit dem Navi-Plugin kann in einem Land nach Straßennamen gesucht werden.</p>
-            <a class="btn btn-lg btn-primary" href="/navi" role="button">Navi-Page »</a>
-        </div>
-        <div class="jumbotron">
-            <h1>Temperatures</h1>
-            <p class="lead">Mit dem Temperature-Plugin können Temperaturmessungen eines Sensors angezeigt werden.</p>
-            <a class="btn btn-lg btn-primary" href="/temperatures" role="button">Temperatures-Page »</a>
-        </div>
-    </main>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Temperature</th>
+                </tr>
+            </thead>
+            <tbody id="temperatures"></tbody>
+        </table>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('form').submit(false);
+            var temperatures = $("#temperatures");
+
+            if (window.location.href.indexOf("from") >= 0 && window.location.href.indexOf("until") >= 0) {
+                var from = urlParam("from") + "T00:00";
+                var until = urlParam("until") + "T23:59";
+                $("#inputFrom").val(from);
+                $("#inputUntil").val(until);
+                setTimeout(function () {
+                    getTemperatureXML(from, until);
+                }, 500);
+            }
+            else {
+                $("#inputFrom").val("2018-12-20T12:00");
+                $("#inputUntil").val("2018-12-31T23:59");
+            }
+
+            $("#submitLoadTemperatures").click(function () {
+                getTemperatureXML($("#inputFrom").val(), $("#inputUntil").val());
+            });
+
+            function getTemperatureXML(from, until) {
+                $.ajax({
+                    type: "GET",
+                    url: "/getTemperatures?from=" + from + "&until=" + until,
+                    dataType: "xml",
+                    success: xmlParser
+                });
+            };
+
+            function xmlParser(xml) {
+                $("#temperatures").empty();
+                var counter = 1;
+                $(xml).find("measurement").each(function () {
+                    var time = $(this).find('time').text();
+                    var temperature = $(this).find('temperature').text() + " °C";
+                    $("#temperatures").append('<tr><th scope="row">' + counter + '</th><td>' + time + '</td><td>' + temperature + '</td>');
+                    counter++;
+                });
+            };
+
+            function urlParam(name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                return results[1] || 0;
+            }
+        });
+    </script>
+
 </body>
 </html>

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MyWebServer.src.Plugins
 {
-    class ToLowerPlugin : IPlugin
+    public class ToLowerPlugin : IPlugin
     {
         private static readonly string ERROR_RESPONSE = "Bitte Text eingeben.";
 

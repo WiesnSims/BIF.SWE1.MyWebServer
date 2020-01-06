@@ -8,7 +8,7 @@ using System.Text;
 
 namespace MyWebServer.src.Plugins
 {
-    class DefaultErrorPlugin : IPlugin
+    public class DefaultErrorPlugin : IPlugin
     {
         public float CanHandle(IRequest req)
         {

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MyWebServer.src.Plugins
 {
-    class TestPlugin : IPlugin
+    public class TestPlugin : IPlugin
     {
         public float CanHandle(IRequest req)
         {
