@@ -10,12 +10,17 @@ namespace MyWebServer.src.Plugins
     public class TemperaturePlugin : IPlugin
     {
         private SensorTemperatureDB db = new SensorTemperatureDB();
+        //db.InitializeDatabase();
 
         public float CanHandle(IRequest req)
         {
             if (req.Url.Path != "/temperatures" && req.Url.Path != "/getTemperatures") return 0;
             if (req.Url.ParameterCount != 2) return 0;
             if (!req.Url.Parameter.ContainsKey("from") || !req.Url.Parameter.ContainsKey("until")) return 0;
+
+            ConsoleWrite.White("URL:");
+
+            ConsoleWrite.White(req.Url.ParameterCount + " : " + req.Url.Segments);
 
             try
             {
@@ -31,15 +36,13 @@ namespace MyWebServer.src.Plugins
 
         public IResponse Handle(IRequest req)
         {
-            IUrl url = req.Url;
-            if (url.Path == "/temperatures")
+            IUrl url = req.Url; //url.Path == "/getTemperatures"
+            if (url.Path == "/temperatures") //Return HTML-page temperatures
             {
-                //Return HTML-page temperatures
                 return WebPagePlugin.CreateWebpageResponse("/temperatures");
             }
-            else //url.Path == "/getTemperatures"
+            else //Return XML-file with temperatures
             {
-                //Return XML-file with temperatures
                 DateTime from = Convert.ToDateTime(url.Parameter["from"]);
                 DateTime until = Convert.ToDateTime(url.Parameter["until"]);
                 Response response = new Response();

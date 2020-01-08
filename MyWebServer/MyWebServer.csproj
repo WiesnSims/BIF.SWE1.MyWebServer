@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <StartupObject>MyWebServer.Program</StartupObject>
+    <Configurations>Debug;Release;ProperRelease</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

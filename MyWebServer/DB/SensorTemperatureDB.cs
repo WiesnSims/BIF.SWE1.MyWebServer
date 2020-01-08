@@ -1,17 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace MyWebServer.Database
 {
     class SensorTemperatureDB
     {
-        private const string CONNECTION_STRING = "Server=127.0.0.1;Database=sensortemperaturedb;Uid=root;Pwd=;";
+        private const string CONNECTION_STRING = "Server=127.0.0.1;Database=sensortemperaturedb;Uid=root;Pwd=root1234;";
 
         public SensorTemperatureDB()
         {
@@ -22,7 +17,7 @@ namespace MyWebServer.Database
             using (MySqlConnection db = new MySqlConnection(CONNECTION_STRING))
             {
                 db.Open();
-                MySqlCommand cmd = new MySqlCommand(@"SELECT COUNT(*) FROM Temperatures WHERE YEAR(time) BETWEEN 2008 AND 2018", db);
+                MySqlCommand cmd = new MySqlCommand(@"SELECT COUNT(*) FROM Temperatures WHERE YEAR(time) BETWEEN 2009 AND 2019", db);
                 int count;
                 using (MySqlDataReader rd = cmd.ExecuteReader())
                 {
@@ -33,8 +28,8 @@ namespace MyWebServer.Database
                 if (count < 10000)
                 {
                     //Insert test data:
-                    DateTime time = new DateTime(2008, 1, 1, 0, 0, 0);
-                    double lastTemp = TemperatureTestData.GetRandomTemperature();
+                    DateTime time = new DateTime(2009, 1, 1, 0, 0, 0);
+                    double lastTemp = TemperatureTestData.GetRandomTemperature(); //returns double value from own random generator
 
                     while (time < DateTime.Now)
                     {
@@ -51,7 +46,7 @@ namespace MyWebServer.Database
             }
         }
 
-        public Dictionary<DateTime, double> GetTemperaturesOfTimespan(DateTime from, DateTime until)
+        public Dictionary<DateTime, double> GetTemperaturesOfTimespan(DateTime from, DateTime until) //returns Dictionary with timestamp + value for all data between both DateTime parameters
         {
             var temperatures = new Dictionary<DateTime, double>();
 
@@ -78,9 +73,9 @@ namespace MyWebServer.Database
                     }
                 }
             }
-            catch
+            catch(Exception exc) //Error on connecting to Database
             {
-                //Because DB does not exist on jenkins.....
+                Console.WriteLine("Connection to Database failed! error: " + exc.Message);
             }
 
             return temperatures;
@@ -101,7 +96,7 @@ namespace MyWebServer.Database
             }
             catch(Exception e)
             {
-                ConsoleWrite.Red("Error inserting testdata.");
+                ConsoleWrite.Red("Error while inserting test data. Error: " + e.Message);
             }
         }
     }

@@ -19,8 +19,8 @@ namespace MyWebServer
             plugins.Add(new DefaultErrorPlugin());
             plugins.Add(new WebPagePlugin());
             plugins.Add(new ToLowerPlugin());
-            //plugins.Add(new TemperaturePlugin());
-            //plugins.Add(new NaviPlugin());
+            plugins.Add(new TemperaturePlugin());
+            plugins.Add(new NaviPlugin());
         }
 
         public IEnumerable<IPlugin> Plugins

@@ -1,4 +1,5 @@
 ﻿using BIF.SWE1.Interfaces;
+using MyWebServer.Database;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -13,24 +14,33 @@ namespace MyWebServer.src
         private static readonly string DEFAULT_IP_ADDRESS = "127.0.0.1";
         private static readonly string DEFAULT_PORT = "8080";
 
-        private string ipAdress;
+        private string ipadress;
         private string port;
         private PluginManager pluginManager = new PluginManager();
 
+
+        private SensorTemperatureDB db = new SensorTemperatureDB();
+
+
         public Webserver(string ipAdress, string port) //Creates Webserver with ip Adress and port
         {
-            this.ipAdress = ipAdress;
+            this.ipadress = ipAdress;
             this.port = port;
         }
         public Webserver()
         {
-            this.ipAdress = DEFAULT_IP_ADDRESS;
+            this.ipadress = DEFAULT_IP_ADDRESS;
             this.port = DEFAULT_PORT;
         }
 
         public void Start() //Starts Server
         {
-            TcpListener listener = new TcpListener(IPAddress.Parse(ipAdress), int.Parse(port));
+            //generate random sensor data
+            Thread sensorThread = new Thread(() => MeasureSensorTemperature());
+            sensorThread.Start();
+
+
+            TcpListener listener = new TcpListener(IPAddress.Parse(ipadress), int.Parse(port));
             listener.Start();
             List<Thread> requestHandlerThreads = new List<Thread>();
             while (true) //Creates new Thread / Socket when new User connects
@@ -75,13 +85,27 @@ namespace MyWebServer.src
             }
             catch (Exception e)
             {
-                ConsoleWrite.Red("Error occured! Exception: " + e.Message);
+                ConsoleWrite.Red("Error occured! Error: " + e.Message + ": " + e.InnerException);
             }
         }
 
         public void AddPlugin(IPlugin plugin) //Adds plugins to server
         {
             pluginManager.Add(plugin);
+        }
+
+        private void MeasureSensorTemperature()
+        {
+            //only executed once to fill test data
+            //db.InitializeDatabase();
+
+            double currentTemperature = TemperatureTestData.GetRandomTemperature();
+            while (true)
+            {
+                currentTemperature = TemperatureTestData.GetRandomTemperature(currentTemperature);
+                db.InsertTemperature(DateTime.Now, currentTemperature);
+                Thread.Sleep(5000);
+            }
         }
     }
 }
