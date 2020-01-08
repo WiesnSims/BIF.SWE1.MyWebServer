@@ -22,7 +22,7 @@ namespace MyWebServer
                 serverThread.Start();
                 ConsoleWrite.Green("Server is running.");
 
-                //Manual Loading of Plugins (not working as intended)
+                ////Manual Loading of Plugins (not working as intended, because .dll files could not be created right)
 
                 //ConsoleWrite.Green("Server is running...");
                 //ConsoleWrite.White("Hit the F1-key to stop the server.");
@@ -65,12 +65,12 @@ namespace MyWebServer
                 //    }
                 //}
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ConsoleWrite.Red("Server could not be started! ERROR: " + e.Message);
             }
 
-            while(true)
+            while(true) //Console should not close, even if there is no clients
             {
 
             }

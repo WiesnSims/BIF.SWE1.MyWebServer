@@ -18,10 +18,6 @@ namespace MyWebServer.src.Plugins
             if (req.Url.ParameterCount != 2) return 0;
             if (!req.Url.Parameter.ContainsKey("from") || !req.Url.Parameter.ContainsKey("until")) return 0;
 
-            ConsoleWrite.White("URL:");
-
-            ConsoleWrite.White(req.Url.ParameterCount + " : " + req.Url.Segments);
-
             try
             {
                 var from = Convert.ToDateTime(req.Url.Parameter["from"].Replace("%3A", ":"));

@@ -17,7 +17,8 @@ namespace MyWebServer.Database
             using (MySqlConnection db = new MySqlConnection(CONNECTION_STRING))
             {
                 db.Open();
-                MySqlCommand cmd = new MySqlCommand(@"SELECT COUNT(*) FROM Temperatures WHERE YEAR(time) BETWEEN 2009 AND 2019", db);
+                MySqlCommand cmd = new MySqlCommand(@"SELECT COUNT(*) FROM Temperatures 
+                    WHERE YEAR(time) BETWEEN 2009 AND 2019", db);
                 int count;
                 using (MySqlDataReader rd = cmd.ExecuteReader())
                 {
@@ -33,7 +34,8 @@ namespace MyWebServer.Database
 
                     while (time < DateTime.Now)
                     {
-                        cmd = new MySqlCommand(@"INSERT INTO `Temperatures` (`Time`, `Temperature`) VALUES (@time, @temp)", db);
+                        cmd = new MySqlCommand(@"INSERT INTO `Temperatures` (`Time`, `Temperature`) 
+                            VALUES (@time, @temp)", db);
                         cmd.Parameters.AddWithValue("@time", time);
                         cmd.Parameters.AddWithValue("@temp", lastTemp);
                         int rows = cmd.ExecuteNonQuery();
@@ -95,7 +97,8 @@ namespace MyWebServer.Database
                 using (MySqlConnection db = new MySqlConnection(CONNECTION_STRING))
                 {
                     db.Open();
-                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `Temperatures` (`Time`, `Temperature`) VALUES (@time, @temp)", db);
+                    MySqlCommand cmd = new MySqlCommand(@"INSERT INTO `Temperatures` (`Time`, `Temperature`) 
+                        VALUES (@time, @temp)", db);
                     cmd.Parameters.AddWithValue("@time", time);
                     cmd.Parameters.AddWithValue("@temp", temperature);
                     int rows = cmd.ExecuteNonQuery();
