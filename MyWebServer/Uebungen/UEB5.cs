@@ -31,12 +31,12 @@ namespace Uebungen
 
         public string GetStaticFileUrl(string fileName)
         {
-            return "/staticfile";
+            return "/static-file/" + fileName;
         }
 
         public void SetStatiFileFolder(string folder)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException(); ???????
         }
     }
 }

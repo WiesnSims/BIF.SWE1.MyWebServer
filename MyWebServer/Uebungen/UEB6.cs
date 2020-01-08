@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BIF.SWE1.Interfaces;
 using MyWebServer;
+using MyWebServer.src.Plugins;
 
 namespace Uebungen
 {
@@ -25,37 +26,37 @@ namespace Uebungen
 
         public string GetNaviUrl()
         {
-            throw new NotImplementedException();
+            return "/naviQuery";
         }
 
         public IPlugin GetNavigationPlugin()
         {
-            throw new NotImplementedException();
+            return new NaviPlugin();
         }
 
         public IPlugin GetTemperaturePlugin()
         {
-            throw new NotImplementedException();
+            return new TemperaturePlugin();
         }
 
         public string GetTemperatureRestUrl(DateTime from, DateTime until)
         {
-            throw new NotImplementedException();
+            return "/getTemperatures?from=" + from.ToString("yyyy-MM-dd") + "&until=" + until.ToString("yyyy-MM-dd");
         }
 
         public string GetTemperatureUrl(DateTime from, DateTime until)
         {
-            throw new NotImplementedException();
+            return "/temperatures?from=" + from.ToString("yyyy-MM-dd") + "&until=" + until.ToString("yyyy-MM-dd");
         }
 
         public IPlugin GetToLowerPlugin()
         {
-            throw new NotImplementedException();
+            return new ToLowerPlugin();
         }
 
         public string GetToLowerUrl()
         {
-            throw new NotImplementedException();
+            return "/toLower";
         }
     }
 }
