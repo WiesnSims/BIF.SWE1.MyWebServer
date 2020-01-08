@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['database_131',['Database',['../namespace_my_web_server_1_1_database.html',1,'MyWebServer']]],
+  ['method_132',['Method',['../interface_b_i_f_1_1_s_w_e1_1_1_interfaces_1_1_i_request.html#a35e88dfaff0f47db305a5a747997c642',1,'BIF.SWE1.Interfaces.IRequest.Method()'],['../class_my_web_server_1_1_request.html#a9e4f4b3b33ae4b58cbe91f461d744f5d',1,'MyWebServer.Request.Method()']]],
+  ['milestone1_5freturn_5fmain_5fpage_133',['milestone1_return_main_page',['../class_b_i_f_1_1_s_w_e1_1_1_unit_tests_1_1_u_e_b3.html#adc6fe9a7ab4ae84c628030604d7f5c51',1,'BIF::SWE1::UnitTests::UEB3']]],
+  ['milestone2_5freturn_5ferror_5fon_5finvalid_5furl_134',['milestone2_return_error_on_invalid_url',['../class_b_i_f_1_1_s_w_e1_1_1_unit_tests_1_1_u_e_b5.html#a288a66bda73693942e404786fe88ac6f',1,'BIF::SWE1::UnitTests::UEB5']]],
+  ['milestone2_5freturn_5fmain_5fpage_135',['milestone2_return_main_page',['../class_b_i_f_1_1_s_w_e1_1_1_unit_tests_1_1_u_e_b5.html#a2a877b6a4b232b46846f4332e5474d89',1,'BIF::SWE1::UnitTests::UEB5']]],
+  ['myownunittests_2eassemblyinfo_2ecs_136',['MyOwnUnitTests.AssemblyInfo.cs',['../_debug_2netcoreapp2_81_2_my_own_unit_tests_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_proper_release_2netcoreapp2_81_2_my_own_unit_tests_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2netcoreapp2_81_2_my_own_unit_tests_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['myownunittests_2ecsproj_2efilelistabsolute_2etxt_137',['MyOwnUnitTests.csproj.FileListAbsolute.txt',['../_debug_2netcoreapp2_81_2_my_own_unit_tests_8csproj_8_file_list_absolute_8txt.html',1,'(Global Namespace)'],['../_proper_release_2netcoreapp2_81_2_my_own_unit_tests_8csproj_8_file_list_absolute_8txt.html',1,'(Global Namespace)']]],
+  ['myownunittests_2eprogram_2ecs_138',['MyOwnUnitTests.Program.cs',['../_debug_2netcoreapp2_81_2_my_own_unit_tests_8_program_8cs.html',1,'(Global Namespace)'],['../_proper_release_2netcoreapp2_81_2_my_own_unit_tests_8_program_8cs.html',1,'(Global Namespace)'],['../_release_2netcoreapp2_81_2_my_own_unit_tests_8_program_8cs.html',1,'(Global Namespace)']]],
+  ['myrequesthelper_2ecs_139',['MyRequestHelper.cs',['../_my_request_helper_8cs.html',1,'']]],
+  ['myunittests_140',['MyUnitTests',['../namespace_my_unit_tests.html',1,'']]],
+  ['mywebserver_141',['MyWebServer',['../namespace_my_web_server.html',1,'']]],
+  ['mywebserver_2eassemblyinfo_2ecs_142',['MyWebServer.AssemblyInfo.cs',['../_debug_2netcoreapp2_81_2_my_web_server_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_proper_release_2netcoreapp2_81_2_my_web_server_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['mywebserver_2ecsproj_2efilelistabsolute_2etxt_143',['MyWebServer.csproj.FileListAbsolute.txt',['../_debug_2netcoreapp2_81_2_my_web_server_8csproj_8_file_list_absolute_8txt.html',1,'(Global Namespace)'],['../_proper_release_2netcoreapp2_81_2_my_web_server_8csproj_8_file_list_absolute_8txt.html',1,'(Global Namespace)']]],
+  ['mywebserver_2etests_2eassemblyinfo_2ecs_144',['MyWebServer.Tests.AssemblyInfo.cs',['../_debug_2netcoreapp2_81_2_my_web_server_8_tests_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_proper_release_2netcoreapp2_81_2_my_web_server_8_tests_8_assembly_info_8cs.html',1,'(Global Namespace)'],['../_release_2netcoreapp2_81_2_my_web_server_8_tests_8_assembly_info_8cs.html',1,'(Global Namespace)']]],
+  ['mywebserver_2etests_2ecsproj_2efilelistabsolute_2etxt_145',['MyWebServer.Tests.csproj.FileListAbsolute.txt',['../_debug_2netcoreapp2_81_2_my_web_server_8_tests_8csproj_8_file_list_absolute_8txt.html',1,'(Global Namespace)'],['../_proper_release_2netcoreapp2_81_2_my_web_server_8_tests_8csproj_8_file_list_absolute_8txt.html',1,'(Global Namespace)']]],
+  ['mywebserver_2etests_2eprogram_2ecs_146',['MyWebServer.Tests.Program.cs',['../_debug_2netcoreapp2_81_2_my_web_server_8_tests_8_program_8cs.html',1,'(Global Namespace)'],['../_proper_release_2netcoreapp2_81_2_my_web_server_8_tests_8_program_8cs.html',1,'(Global Namespace)'],['../_release_2netcoreapp2_81_2_my_web_server_8_tests_8_program_8cs.html',1,'(Global Namespace)']]],
+  ['plugins_147',['Plugins',['../namespace_my_web_server_1_1src_1_1_plugins.html',1,'MyWebServer::src']]],
+  ['src_148',['src',['../namespace_my_web_server_1_1src.html',1,'MyWebServer']]]
+];
