@@ -46,9 +46,9 @@ namespace MyWebServer.Database
             }
         }
 
-        public Dictionary<DateTime, double> GetTemperaturesOfTimespan(DateTime from, DateTime until) //returns Dictionary with timestamp + value for all data between both DateTime parameters
+        public Dictionary<DateTime, String> GetTemperaturesOfTimespan(DateTime from, DateTime until) //returns Dictionary with timestamp + value for all data between both DateTime parameters
         {
-            var temperatures = new Dictionary<DateTime, double>();
+            var temperatures = new Dictionary<DateTime, String>();
 
             try
             {
@@ -56,19 +56,26 @@ namespace MyWebServer.Database
                 {
                     db.Open();
 
+                    //MySqlCommand cmd = new MySqlCommand(@"SELECT Time, Temperature FROM Temperatures WHERE
+                    //YEAR(Time) BETWEEN YEAR(@from) AND YEAR(@until) AND
+                    //MONTH(Time) BETWEEN MONTH(@from) AND MONTH(@until) AND
+                    //DAY(Time) BETWEEN DAY(@from) AND DAY(@until)
+                    //ORDER BY Time", db);
+
                     MySqlCommand cmd = new MySqlCommand(@"SELECT Time, Temperature FROM Temperatures WHERE
-                    YEAR(Time) BETWEEN YEAR(@from) AND YEAR(@until) AND
-                    MONTH(Time) BETWEEN MONTH(@from) AND MONTH(@until) AND
-                    DAY(Time) BETWEEN DAY(@from) AND DAY(@until)
+                    Time between @from and @until
                     ORDER BY Time", db);
-                    cmd.Parameters.AddWithValue("@from", from);
-                    cmd.Parameters.AddWithValue("@until", until);
+
+                    cmd.Parameters.AddWithValue("@from", from.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                    cmd.Parameters.AddWithValue("@until", until.ToString("yyyy-MM-dd HH:mm:ss.fff"));
 
                     using (MySqlDataReader rd = cmd.ExecuteReader())
                     {
+                        var add = 0;
                         while (rd.Read())
                         {
-                            temperatures.Add(rd.GetDateTime(0), rd.GetDouble(1));
+                            temperatures.Add(rd.GetDateTime(0).AddHours(add*3), rd.GetString(1));
+                            add++;
                         }
                     }
                 }

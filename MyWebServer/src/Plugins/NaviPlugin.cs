@@ -34,7 +34,7 @@ namespace MyWebServer.src.Plugins
             }
             if (req.ContentString.Contains("refresh="))
             {
-                Thread mapRebuilderThread = new Thread(() => RebuildMap(req.ContentString.Split('=')[1])); //austria, switzerland, monaco...
+                Thread mapRebuilderThread = new Thread(() => RebuildMap(req.ContentString.Split('=')[1])); //austria
                 IsRebuilding = true;
                 mapRebuilderThread.Start();
                 response.SetContent("Neu laden der Karte erfolgreich gestartet.");
@@ -73,7 +73,7 @@ namespace MyWebServer.src.Plugins
             string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             //string filename = country + ".osm";
             string filename = "data.osm";
-            string path = Path.Combine(directory, @"static-files", "osm_data/" + filename);
+            string path = Path.Combine(directory, @"static-files", "osm_data\\" + filename);
             using (var fs = File.OpenRead(path))
             using (var xml = new System.Xml.XmlTextReader(fs))
             {

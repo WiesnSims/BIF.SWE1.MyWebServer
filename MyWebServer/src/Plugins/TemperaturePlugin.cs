@@ -55,7 +55,7 @@ namespace MyWebServer.src.Plugins
 
         private string GetTemperaturesContentXML(DateTime from, DateTime until)
         {
-            Dictionary<DateTime, double> temperatures = db.GetTemperaturesOfTimespan(from, until);
+            Dictionary<DateTime, String> temperatures = db.GetTemperaturesOfTimespan(from, until);
             var baseXML = new XElement("temperatures");
             foreach (var temp in temperatures)
             {
